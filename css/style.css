@@ -4798,6 +4798,9 @@ footer {
     width: 50%;
     margin: 0 auto;
     text-align: center; }
+    @media screen and (max-width: 425px) {
+      .order-confirm__card {
+        width: 100%; } }
     .order-confirm__card__resume {
       padding: 2rem; }
       .order-confirm__card__resume i {
@@ -4813,5 +4816,4 @@ footer {
     .order-confirm__card__nav {
       background-color: #D1D1D1;
       padding: 1rem 0; }
-
 /*# sourceMappingURL=style.css.map */
