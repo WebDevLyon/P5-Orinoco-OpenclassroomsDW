@@ -12,6 +12,7 @@
 .flex-block{
 	display: flex;
 	padding: 1rem;
+	align-items: center;
 	@media screen and (max-width: 425px) {
 		display: block;
 	}

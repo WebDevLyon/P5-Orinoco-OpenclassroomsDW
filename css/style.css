@@ -4555,7 +4555,10 @@ readers do not read off random characters that represent icons */
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  padding: 1rem; }
+  padding: 1rem;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center; }
   @media screen and (max-width: 425px) {
     .flex-block {
       display: block; } }
@@ -4569,6 +4572,13 @@ readers do not read off random characters that represent icons */
   #error__msg {
     text-align: center;
     font-size: 1.5rem; }
+
+#panierVide {
+  text-align: center;
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+  margin: auto; }
 
 .btn {
   background: transparent;
@@ -4585,6 +4595,67 @@ readers do not read off random characters that represent icons */
     .btn--basket:hover, .btn--basket:focus {
       background: #C8E6C9; }
 
+table {
+  margin: auto;
+  border: none;
+  letter-spacing: 1px;
+  font-size: 0.8rem; }
+
+td, th {
+  border: 1px solid #bebebe;
+  padding: 10px 20px; }
+
+th {
+  background-color: #ebebeb; }
+
+td {
+  text-align: center; }
+
+caption {
+  padding: 10px; }
+
+.annulerProduit {
+  margin: 1rem; }
+
+.form {
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1; }
+  .form__group {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: row;
+            flex-direction: row; }
+    .form__group label {
+      -webkit-box-flex: 0;
+          -ms-flex: none;
+              flex: none;
+      display: block;
+      width: 125px;
+      font-weight: bold;
+      font-size: 1em; }
+      .form__group label.right-inline {
+        text-align: right;
+        padding-right: 8px;
+        padding-left: 10px;
+        width: auto; }
+    .form__group .input-control {
+      -webkit-box-flex: 1;
+          -ms-flex: 1 1 auto;
+              flex: 1 1 auto;
+      display: block;
+      margin-bottom: 10px;
+      margin-right: 8px;
+      padding: 4px;
+      margin-top: -4px; }
+
+.btn-validation {
+  padding: 5px 15px;
+  margin: 1rem 5rem; }
+
 .topbar {
   background-color: #F3E9F1;
   display: -webkit-box;
@@ -4593,7 +4664,7 @@ readers do not read off random characters that represent icons */
   -webkit-box-pack: justify;
       -ms-flex-pack: justify;
           justify-content: space-between;
-  padding: 2rem;
+  padding: 0 2rem 2rem 2rem;
   -webkit-box-align: baseline;
       -ms-flex-align: baseline;
           align-items: baseline; }
@@ -4664,7 +4735,7 @@ footer {
       .list-product__block--right h2 {
         font-size: 3rem;
         color: red; }
-        @media screen and (max-width: 720px) {
+        @media screen and (max-width: 425px) {
           .list-product__block--right h2 {
             font-size: 1.5rem; } }
       .list-product__block--right p {
@@ -4728,5 +4799,4 @@ footer {
     .order-confirm__card__nav {
       background-color: #D1D1D1;
       padding: 1rem 0; }
-
 /*# sourceMappingURL=style.css.map */

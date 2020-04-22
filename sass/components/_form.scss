@@ -1,0 +1,32 @@
+.form{
+	flex:1;
+	&__group{
+		display: flex;
+		flex-direction: row;
+		& label{
+			flex: none;
+			display: block;
+			width: 125px;
+			font-weight: bold;
+			font-size: 1em;
+			&.right-inline {
+				text-align: right;  
+				padding-right: 8px;
+				padding-left: 10px;
+				width: auto;
+			}
+		}
+		& .input-control {
+			flex: 1 1 auto;
+			display: block;
+			margin-bottom: 10px;
+			margin-right: 8px;
+			padding: 4px;
+			margin-top: -4px;
+		}
+	}
+}
+.btn-validation{
+	padding: 5px 15px;
+	margin: 1rem 5rem;
+}
