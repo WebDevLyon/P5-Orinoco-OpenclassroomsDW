@@ -1,0 +1,21 @@
+.topbar {
+	background-color: #F3E9F1;
+	display: flex;
+	justify-content: space-between;
+	padding: 2rem;
+	align-items: baseline;
+	&__logo{
+		width: 12.5rem;
+	}
+	&__nav{
+		font-size: 1.5rem;
+		@media screen  and (max-width: 425px){
+			font-size: 1rem;
+		}	
+	}
+	@media screen  and (max-width: 425px){
+		flex-direction: column;
+		align-items: center;
+		padding :0;
+	}
+}

@@ -1,0 +1,17 @@
+.nav{
+	&__link{
+		text-decoration: none;
+		color: black;
+		padding: 0 0.5rem;
+		max-width: 140px;
+		font-weight: bold;
+		text-decoration: none;
+		&:hover, &:focus {
+			background: #BF7472cc;
+		}
+	}
+	@media screen  and (max-width: 425px){
+		display: flex;
+		justify-content: space-between;
+	}
+}
