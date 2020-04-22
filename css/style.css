@@ -4551,6 +4551,25 @@ readers do not read off random characters that represent icons */
       -ms-flex-positive: 1;
           flex-grow: 1; }
 
+.flex-block {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  padding: 1rem; }
+  @media screen and (max-width: 425px) {
+    .flex-block {
+      display: block; } }
+
+#error {
+  text-align: center;
+  margin: 2rem; }
+  #error__logo {
+    color: #C57863;
+    font-size: 3rem; }
+  #error__msg {
+    text-align: center;
+    font-size: 1.5rem; }
+
 .topbar {
   background-color: #F3E9F1;
   display: -webkit-box;
@@ -4604,8 +4623,60 @@ footer {
   padding: 1.5rem;
   background-color: #F3E9F1; }
 
-.error-msg {
-  text-align: center;
-  font-size: 1.5rem; }
+.sheet-product {
+  margin: 2rem; }
+  .sheet-product__name {
+    font-size: 2rem;
+    text-align: center; }
+  .sheet-product__img {
+    -webkit-box-flex: 3;
+        -ms-flex: 3;
+            flex: 3; }
+    .sheet-product__img img {
+      width: 100%; }
+  .sheet-product__description {
+    -webkit-box-flex: 3;
+        -ms-flex: 3;
+            flex: 3;
+    padding: 1rem; }
+    @media screen and (max-width: 425px) {
+      .sheet-product__description {
+        padding: 0; } }
+    .sheet-product__description__head {
+      font-weight: bold; }
+
+.order-confirm {
+  background-color: #F3E9F1;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column; }
+  .order-confirm__topbar {
+    text-align: center; }
+    .order-confirm__topbar__logo {
+      width: 50%; }
+  .order-confirm__card {
+    background-color: #FFFFFF;
+    width: 50%;
+    margin: 0 auto;
+    text-align: center; }
+    .order-confirm__card__resume {
+      padding: 2rem; }
+      .order-confirm__card__resume i {
+        color: #EEA7A0;
+        font-size: 3rem;
+        padding: 5px;
+        border: 10px solid #EEA7A0;
+        border-radius: 50%; }
+      .order-confirm__card__resume__congrat {
+        color: #525F6D;
+        font-size: 4rem;
+        padding: 1rem 0; }
+    .order-confirm__card__nav {
+      background-color: #D1D1D1;
+      padding: 1rem 0; }
 
 /*# sourceMappingURL=style.css.map */

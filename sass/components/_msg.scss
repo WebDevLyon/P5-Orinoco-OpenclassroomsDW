@@ -1,4 +1,12 @@
-.error-msg{
+#error{
 	text-align: center;
-	font-size: 1.5rem;
+	margin: 2rem;
+	&__logo{
+		color: #C57863;
+		font-size: 3rem;
+	}
+	&__msg{
+		text-align: center;
+		font-size: 1.5rem;
+	}
 }

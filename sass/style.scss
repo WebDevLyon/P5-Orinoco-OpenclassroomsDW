@@ -1,9 +1,13 @@
 @import "vendors/fontawesome.scss";
 @import "vendors/solid.scss";
 @import "base/template";
-@import "components/header";
-@import "components/nav";
-@import "components/footer";
-@import "components/msg"
+@import "components/msg";
+@import "layouts/header";
+@import "layouts/nav";
+@import "layouts/footer";
+@import "layouts/sheet-product";
+@import "page/confirm-order";
+
+
 
 
