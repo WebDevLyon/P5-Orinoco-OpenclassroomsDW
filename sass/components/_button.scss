@@ -1,0 +1,18 @@
+.btn {
+  background: transparent;
+  border: 2px solid black;
+  border-radius: 0.6em;
+  cursor: pointer;
+  &--basket{
+    font-size: 1rem;
+    line-height: 1;
+    margin: auto;
+    padding: 1rem 1rem;
+    text-transform: uppercase;
+    font-weight: 700;
+    &:hover,  &:focus {
+      background: #C8E6C9;
+
+    }
+  }
+}

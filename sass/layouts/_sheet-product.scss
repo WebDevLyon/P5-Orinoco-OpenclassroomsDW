@@ -1,4 +1,5 @@
 .sheet-product{
+	display: none;
 	margin : 2rem;
 	&__name{
 		font-size: 2rem;
@@ -18,6 +19,9 @@
 		}
 		&__head{
 			font-weight:bold;
+		}
+		&__order{
+			text-align: center;
 		}
 	}
 }

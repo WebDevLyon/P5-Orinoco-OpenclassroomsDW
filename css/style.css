@@ -4570,6 +4570,21 @@ readers do not read off random characters that represent icons */
     text-align: center;
     font-size: 1.5rem; }
 
+.btn {
+  background: transparent;
+  border: 2px solid black;
+  border-radius: 0.6em;
+  cursor: pointer; }
+  .btn--basket {
+    font-size: 1rem;
+    line-height: 1;
+    margin: auto;
+    padding: 1rem 1rem;
+    text-transform: uppercase;
+    font-weight: 700; }
+    .btn--basket:hover, .btn--basket:focus {
+      background: #C8E6C9; }
+
 .topbar {
   background-color: #F3E9F1;
   display: -webkit-box;
@@ -4623,7 +4638,40 @@ footer {
   padding: 1.5rem;
   background-color: #F3E9F1; }
 
+.list-product {
+  margin-top: 1rem; }
+  .list-product__block {
+    border: 3px solid #59545e;
+    margin: 1%;
+    padding: 1%;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center; }
+    .list-product__block--left {
+      -webkit-box-flex: 2;
+          -ms-flex: 2;
+              flex: 2; }
+      .list-product__block--left img {
+        width: 100%; }
+    .list-product__block--right {
+      -webkit-box-flex: 3;
+          -ms-flex: 3;
+              flex: 3;
+      text-align: center; }
+      .list-product__block--right h2 {
+        font-size: 3rem;
+        color: red; }
+        @media screen and (max-width: 720px) {
+          .list-product__block--right h2 {
+            font-size: 1.5rem; } }
+      .list-product__block--right p {
+        font-size: 1.5rem; }
+
 .sheet-product {
+  display: none;
   margin: 2rem; }
   .sheet-product__name {
     font-size: 2rem;
@@ -4644,6 +4692,8 @@ footer {
         padding: 0; } }
     .sheet-product__description__head {
       font-weight: bold; }
+    .sheet-product__description__order {
+      text-align: center; }
 
 .order-confirm {
   background-color: #F3E9F1;

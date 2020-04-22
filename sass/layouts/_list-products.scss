@@ -1,0 +1,30 @@
+.list-product{
+	margin-top: 1rem;
+	&__block{
+		border: 3px solid rgb(89, 84, 94);
+		margin: 1%;
+		padding: 1%;
+		display: flex;
+		align-items: center;
+		&--left{
+			flex:2;
+			& img{
+				width: 100%;
+			}
+		}
+		&--right{
+			flex:3;
+			text-align: center;
+			& h2{
+				font-size: 3rem;
+				color: red;
+				@media screen and (max-width: 720px) {
+					font-size: 1.5rem;					
+				}
+			}
+			& p{
+				font-size: 1.5rem;
+			}
+		}
+	}
+}
