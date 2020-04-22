@@ -1,8 +1,13 @@
 .form{
 	flex:1;
+			@media screen and (max-width: 425px){
+			margin-top: 1rem;	
+		}
 	&__group{
 		display: flex;
-		flex-direction: row;
+		@media screen and (max-width: 425px){
+			display: block;	
+		}
 		& label{
 			flex: none;
 			display: block;
@@ -10,10 +15,11 @@
 			font-weight: bold;
 			font-size: 1em;
 			&.right-inline {
-				text-align: right;  
-				padding-right: 8px;
-				padding-left: 10px;
-				width: auto;
+				@media screen and (min-width: 426px){
+					text-align: right;  
+					padding-right: 8px;
+					padding-left: 10px;
+				}
 			}
 		}
 		& .input-control {
@@ -22,11 +28,9 @@
 			margin-bottom: 10px;
 			margin-right: 8px;
 			padding: 4px;
-			margin-top: -4px;
+			@media screen and (max-width: 425px){
+				width: 95%;
+			}
 		}
 	}
-}
-.btn-validation{
-	padding: 5px 15px;
-	margin: 1rem 5rem;
 }

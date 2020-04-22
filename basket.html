@@ -3,7 +3,6 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-	<link rel="stylesheet" href="css/base.css">
 	<link rel="stylesheet" href="css/style.css">
 	<title>Votre panier ORINOCO</title>
 	<meta name="description" content="ORINOCO est un site de vente en ligne d'ours en peluche, de meubles en bois d'est de caméras anciennes">
@@ -19,17 +18,22 @@
 		</nav>
 	</header>
 	<main class="basket flex-block">
-		<p id="panierVide">Votre panier est vide</p>
-
+		<section id="basket-resume">
+			<p id="panierVide">Votre panier est vide</p>
+		</section>
 		<section class="form">
 			<form method="post" action="" name="form-panier">
 				<fieldset>
 					<legend>Civilité</legend>
 					<div class="form__group">
-						<label for="formNom">Nom : </label>
-						<input type="text" id="formNom" class="form-control" required name="formNom">
-						<label for="formPrenom" class="right-inline">Prénom :</label>
-						<input type="text" id="formPrenom" class="form-control" required name="formPrenom">
+						<div class="form__group">
+							<label for="formNom">Nom : </label>
+							<input type="text" id="formNom" class="form-control input-control" required name="formNom">
+						</div>
+						<div class="form__group">
+							<label for="formPrenom" class="right-inline">Prénom :</label>
+							<input type="text" id="formPrenom" class="form-control input-control" required name="formPrenom">
+						</div>
 					</div>
 				</fieldset> 
 				<fieldset>
@@ -47,14 +51,14 @@
 						<input type="text" id="formVille" class="form-control input-control" required name="formVille">
 					</div>
 				</fieldset> 
-				<input type="button" value="Je valide mon panier et mes informations" class="btn-validation" id="envoiPost">
+				<input type="button" value="Je valide mon panier et mes informations" class="btn btn--form" id="envoiPost">
 			</form>
 		</section>
 	</main>
 	<footer class="bottom-fixed">
 		<p>Site réalisé dans le cadre du projet 5 du parcours d'<a href="https://openclassrooms.com/">Openclassrooms</a> par Nicolas Lachise</p>
 	</footer>
-	<script src="js/Script.js"></script>
+	<script src="js/products.js"></script>
 	<script>
 		addition();
 		validForm()

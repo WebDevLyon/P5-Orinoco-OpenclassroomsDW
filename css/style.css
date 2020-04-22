@@ -4563,6 +4563,12 @@ readers do not read off random characters that represent icons */
     .flex-block {
       display: block; } }
 
+#basket-resume {
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+  margin: auto; }
+
 #error {
   text-align: center;
   margin: 2rem; }
@@ -4574,11 +4580,7 @@ readers do not read off random characters that represent icons */
     font-size: 1.5rem; }
 
 #panierVide {
-  text-align: center;
-  -webkit-box-flex: 1;
-      -ms-flex: 1;
-          flex: 1;
-  margin: auto; }
+  text-align: center; }
 
 .btn {
   background: transparent;
@@ -4594,12 +4596,24 @@ readers do not read off random characters that represent icons */
     font-weight: 700; }
     .btn--basket:hover, .btn--basket:focus {
       background: #C8E6C9; }
+  .btn--form {
+    font-size: 1rem;
+    line-height: 1;
+    margin: 1rem auto;
+    padding: 1rem 1rem;
+    text-transform: uppercase;
+    font-weight: 700; }
+    @media screen and (max-width: 425px) {
+      .btn--form {
+        font-size: 0.8rem; } }
 
 table {
   margin: auto;
   border: none;
   letter-spacing: 1px;
-  font-size: 0.8rem; }
+  font-size: 0.8rem;
+  border-collapse: collapse;
+  border-spacing: 0; }
 
 td, th {
   border: 1px solid #bebebe;
@@ -4621,14 +4635,16 @@ caption {
   -webkit-box-flex: 1;
       -ms-flex: 1;
           flex: 1; }
+  @media screen and (max-width: 425px) {
+    .form {
+      margin-top: 1rem; } }
   .form__group {
     display: -webkit-box;
     display: -ms-flexbox;
-    display: flex;
-    -webkit-box-orient: horizontal;
-    -webkit-box-direction: normal;
-        -ms-flex-direction: row;
-            flex-direction: row; }
+    display: flex; }
+    @media screen and (max-width: 425px) {
+      .form__group {
+        display: block; } }
     .form__group label {
       -webkit-box-flex: 0;
           -ms-flex: none;
@@ -4637,11 +4653,11 @@ caption {
       width: 125px;
       font-weight: bold;
       font-size: 1em; }
-      .form__group label.right-inline {
-        text-align: right;
-        padding-right: 8px;
-        padding-left: 10px;
-        width: auto; }
+      @media screen and (min-width: 426px) {
+        .form__group label.right-inline {
+          text-align: right;
+          padding-right: 8px;
+          padding-left: 10px; } }
     .form__group .input-control {
       -webkit-box-flex: 1;
           -ms-flex: 1 1 auto;
@@ -4649,12 +4665,10 @@ caption {
       display: block;
       margin-bottom: 10px;
       margin-right: 8px;
-      padding: 4px;
-      margin-top: -4px; }
-
-.btn-validation {
-  padding: 5px 15px;
-  margin: 1rem 5rem; }
+      padding: 4px; }
+      @media screen and (max-width: 425px) {
+        .form__group .input-control {
+          width: 95%; } }
 
 .topbar {
   background-color: #F3E9F1;
@@ -4799,4 +4813,5 @@ footer {
     .order-confirm__card__nav {
       background-color: #D1D1D1;
       padding: 1rem 0; }
+
 /*# sourceMappingURL=style.css.map */

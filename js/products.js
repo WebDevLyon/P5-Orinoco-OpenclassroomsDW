@@ -154,7 +154,7 @@ async function detailProduit(){
     	default:
     	console.log("Administration : Veuillez bien renseigner la variable produitSell ligne 2 du fichier script.js");
     }
-};
+  };
 
  /*Fonction ajouter le produit au panier de l'utilisateur
  **********************************************/
@@ -168,4 +168,249 @@ async function detailProduit(){
   	localStorage.setItem("userPanier", JSON.stringify(userPanier));
   	console.log("Administration : le produit a été ajouté au panier");
   });
+  };
+
+/*Page panier
+**********************************************/
+
+addition = () =>{
+    //Vérifie si un prduit est dans le panier
+    if(JSON.parse(localStorage.getItem("userPanier")).length > 0){
+      //S'il n'est pas vide on supprime le message et on créé le tableau récapitulatif
+      document.getElementById("panierVide").remove();
+
+      //Création de la structure principale du tableau  
+      let facture = document.createElement("table");
+      let ligneTableau = document.createElement("tr");
+      let colonneNom = document.createElement("th");
+      let colonnePrixUnitaire = document.createElement("th");
+      let colonneRemove = document.createElement("th");
+      let ligneTotal = document.createElement("tr");
+      let colonneRefTotal = document.createElement("th");
+      let colonnePrixPaye = document.createElement("td");
+
+      //Placement de la structure dans la page et du contenu des entetes
+      let factureSection = document.getElementById("basket-resume");
+      factureSection.appendChild(facture);
+      facture.appendChild(ligneTableau);
+      ligneTableau.appendChild(colonneNom);
+      colonneNom.textContent = "Nom du produit";
+      ligneTableau.appendChild(colonnePrixUnitaire);
+      colonnePrixUnitaire.textContent = "Prix du produit";
+      /*ligneTableau.appendChild(colonneRemove);
+      colonneRemove.textContent = "Annuler un produit";
+      */
+
+      //Pour chaque produit du panier, on créé une ligne avec le nom, le prix
+      
+      //Init de l'incrémentation de l'id des lignes pour chaque produit
+      let i = 0;
+      
+      JSON.parse(localStorage.getItem("userPanier")).forEach((produit)=>{
+        //Création de la ligne
+        let ligneProduit = document.createElement("tr");
+        let nomProduit = document.createElement("td");
+        let prixUnitProduit = document.createElement("td");
+        let removeProduit = document.createElement("i");
+
+        //Attribution des class pour le css
+        ligneProduit.setAttribute("id", "produit"+i);
+        removeProduit.setAttribute("id", "remove"+i);
+        removeProduit.setAttribute('class', "fas fa-trash-alt annulerProduit");
+        //Pour chaque produit on créer un event sur l'icone de la corbeille pour annuler ce produit
+        //bind permet de garder l'incrementation du i qui représente l'index tu panier au moment de la création de l'event
+        //annulerProduit L233
+        removeProduit.addEventListener('click', annulerProduit.bind(i));
+        i++;
+
+        //Insertion dans le HTML
+        facture.appendChild(ligneProduit);
+        ligneProduit.appendChild(nomProduit);
+        ligneProduit.appendChild(prixUnitProduit);
+        ligneProduit.appendChild(removeProduit);
+
+        //Contenu des lignes
+        nomProduit.innerHTML = produit.name;
+        prixUnitProduit.textContent = produit.price / 100 + " €";
+      });
+
+      //Dernière ligne du tableau : Total
+      facture.appendChild(ligneTotal);
+      ligneTotal.appendChild(colonneRefTotal);
+      colonneRefTotal.textContent = "Total à payer"
+      ligneTotal.appendChild(colonnePrixPaye);
+      colonnePrixPaye.setAttribute("id", "sommeTotal")
+
+      //Calcule de l'addition total
+      let totalPaye = 0;
+      JSON.parse(localStorage.getItem("userPanier")).forEach((produit)=>{
+        totalPaye += produit.price / 100;
+      });
+
+      //Affichage du prix total à payer dans l'addition
+      console.log("Administration : " + totalPaye);
+      document.getElementById("sommeTotal").textContent = totalPaye + " €";
+    };
+  }
+
+  //Supprimer un produit du panier
+  annulerProduit = (i) =>{
+    console.log("Administration : Enlever le produit à l'index " + i);
+      //recupérer le array
+      userPanier.splice(i, 1); 
+      console.log("Administration : " + userPanier);
+      //vide le localstorage
+      localStorage.clear();
+      console.log("Administration : localStorage vidé");
+      // mettre à jour le localStorage avec le nouveau panier
+      localStorage.setItem('userPanier', JSON.stringify(userPanier));
+      console.log("Administration : localStorage mis à jour");
+      //relancer la création de l'addition
+      window.location.reload();
+    };
+
+/*Formulaire et vérif etat panier
+**********************************************/
+
+  //vérifie les inputs du formulaire
+  checkInput = () =>{
+    //Controle Regex
+    let checkString = /[a-zA-Z]/;
+    let checkNumber = /[0-9]/;
+    //Source pour vérification email => emailregex.com
+    let checkMail = /(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])/y;
+    let checkSpecialCharacter = /[§!@#$%^&*(),.?":{}|<>]/;
+
+    //message fin de controle
+    let checkMessage = "";
+
+    //Récupération des inputs
+    let formNom = document.getElementById("formNom").value;
+    let formPrenom = document.getElementById("formPrenom").value;
+    let formMail = document.getElementById("formMail").value;
+    let formAdresse = document.getElementById("formAdresse").value;
+    let formVille = document.getElementById("formVille").value;
+
+
+      //tests des différents input du formulaire
+        //Test du nom => aucun chiffre ou charactère spécial permis
+        if(checkNumber.test(formNom) == true || checkSpecialCharacter.test(formNom) == true || formNom == ""){
+          checkMessage = "Vérifier/renseigner votre nom";
+        }else{
+          console.log("Administration : Nom ok");
+        };
+        //Test du nom => aucun chiffre ou charactère spécial permis
+        if(checkNumber.test(formPrenom) == true || checkSpecialCharacter.test(formPrenom) == true || formPrenom == ""){
+          checkMessage = checkMessage + "\n" + "Vérifier/renseigner votre prénom";
+        }else{
+          console.log("Administration : Prénom ok");
+        };
+        //Test du mail selon le regex de la source L256
+        if(checkMail.test(formMail) == false){
+          checkMessage = checkMessage + "\n" + "Vérifier/renseigner votre email";
+        }else{
+          console.log("Administration : Adresse mail ok");
+        };
+        //Test de l'adresse => l'adresse ne contient pas obligatoirement un numéro de rue mais n'a pas de characteres spéciaux
+        if(checkSpecialCharacter.test(formAdresse) == true || formAdresse == ""){
+          checkMessage = checkMessage + "\n" + "Vérifier/renseigner votre adresse";
+        }else{
+          console.log("Administration : Adresse ok");
+        };
+        //Test de la ville => aucune ville en France ne comporte de chiffre ou charactères spéciaux
+        if(checkSpecialCharacter.test(formVille) == true && checkNumber.test(formVille) == true || formVille == ""){
+          checkMessage = checkMessage + "\n" + "Vérifier/renseigner votre ville"
+        }else{
+          console.log("Administration : Ville ok")
+        };
+        //Si un des champs n'est pas bon => message d'alert avec la raison
+        if(checkMessage != ""){
+          alert("Il est nécessaire de :" + "\n" + checkMessage);
+        }
+        //Si tout est ok construction de l'objet contact => a revoir
+        else{
+          contact = {
+            firstName : formNom,
+            lastName : formPrenom,
+            address : formAdresse,
+            city : formVille,
+            email : formMail
+          };
+          return contact;
+        };
+      };
+
+  //Vérification du panier
+  checkPanier = () =>{
+  //Vérifier qu'il y ai au moins un produit dans le panier
+  let etatPanier = JSON.parse(localStorage.getItem("userPanier"));
+  //Si le panier est vide ou null (suppression localStorage par)=>alerte
+  if(etatPanier.length < 1 || etatPanier == null){
+    alert("Votre panier est vide");
+    return false;
+  }else{
+    console.log("Administration : Le panier n'est pas vide")
+    //Si le panier n'est pas vide on rempli le products envoyé à l'API
+    JSON.parse(localStorage.getItem("userPanier")).forEach((produit) =>{
+      products.push(produit._id);
+    });
+    console.log("Administration : Ce tableau sera envoyé à l'API : " + products)
+    return true;
+  }
+};
+
+/*Envoi du formulaire
+**********************************************/
+
+  //Fonction requet post de l'API
+  envoiDonnees = (objetRequest) => {
+    return new Promise((resolve)=>{
+      let request = new XMLHttpRequest();
+      request.onreadystatechange = function() {
+        if(this.readyState == XMLHttpRequest.DONE && this.status == 201) 
+        {
+          //Sauvegarde du retour de l'API dans la sessionStorage pour affichage dans order-confirm.html
+          sessionStorage.setItem("order", this.responseText);
+
+          //Chargement de la page de confirmation
+          document.forms["form-panier"].action = './order-confirm.html';
+          document.forms["form-panier"].submit();
+
+          resolve(JSON.parse(this.responseText));
+        }
+      };
+      request.open("POST", APIURL + "order");
+      request.setRequestHeader("Content-Type", "application/json");
+      request.send(objetRequest);
+    });
+  };
+
+  //Au click sur le btn de validation du formulaire
+  validForm = () =>{
+    //Ecoute de l'event click du formulaire
+    let btnForm = document.getElementById("envoiPost");
+    btnForm.addEventListener("click", function(){
+      //Lancement des verifications du panier et du form => si Ok envoi
+      if(checkPanier() == true && checkInput() != null){
+        console.log("Administration : L'envoi peut etre fait");
+      //Création de l'objet à envoyer
+      let objet = {
+       contact,
+       products
+     };
+     console.log("Administration : " + objet);
+     //Conversion en JSON
+     let objetRequest = JSON.stringify(objet);
+     console.log("Administration : " + objetRequest);
+     //Envoi de l'objet via la function
+     envoiDonnees(objetRequest);
+
+     //Une fois la commande faite retour à l'état initial des tableaux/objet/localStorage
+     contact = {};
+     products = [];
+     localStorage.clear();
+   }else{
+    console.log("Administration : ERROR");
+  };
+});
   };
