@@ -167,6 +167,7 @@ async function detailProduit(){
   	userPanier.push(produits);
   	localStorage.setItem("userPanier", JSON.stringify(userPanier));
   	console.log("Administration : le produit a été ajouté au panier");
+    alert("Vous avez ajouté ce produit dans votre panier")
   });
   };
 
