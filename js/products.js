@@ -154,7 +154,7 @@ async function detailProduit(){
     	default:
     	console.log("Administration : Veuillez bien renseigner la variable produitSell ligne 2 du fichier script.js");
     }
-  };
+};
 
  /*Fonction ajouter le produit au panier de l'utilisateur
  **********************************************/
@@ -167,7 +167,7 @@ async function detailProduit(){
   	userPanier.push(produits);
   	localStorage.setItem("userPanier", JSON.stringify(userPanier));
   	console.log("Administration : le produit a été ajouté au panier");
-    alert("Vous avez ajouté ce produit dans votre panier")
+  	alert("Vous avez ajouté ce produit dans votre panier")
   });
   };
 
@@ -233,7 +233,7 @@ addition = () =>{
         //Contenu des lignes
         nomProduit.innerHTML = produit.name;
         prixUnitProduit.textContent = produit.price / 100 + " €";
-      });
+    });
 
       //Dernière ligne du tableau : Total
       facture.appendChild(ligneTotal);
@@ -245,18 +245,18 @@ addition = () =>{
       //Calcule de l'addition total
       let totalPaye = 0;
       JSON.parse(localStorage.getItem("userPanier")).forEach((produit)=>{
-        totalPaye += produit.price / 100;
+      	totalPaye += produit.price / 100;
       });
 
       //Affichage du prix total à payer dans l'addition
       console.log("Administration : " + totalPaye);
       document.getElementById("sommeTotal").textContent = totalPaye + " €";
-    };
-  }
+  };
+}
 
   //Supprimer un produit du panier
   annulerProduit = (i) =>{
-    console.log("Administration : Enlever le produit à l'index " + i);
+  	console.log("Administration : Enlever le produit à l'index " + i);
       //recupérer le array
       userPanier.splice(i, 1); 
       console.log("Administration : " + userPanier);
@@ -268,7 +268,7 @@ addition = () =>{
       console.log("Administration : localStorage mis à jour");
       //relancer la création de l'addition
       window.location.reload();
-    };
+  };
 
 /*Formulaire et vérif etat panier
 **********************************************/
@@ -296,68 +296,73 @@ addition = () =>{
       //tests des différents input du formulaire
         //Test du nom => aucun chiffre ou charactère spécial permis
         if(checkNumber.test(formNom) == true || checkSpecialCharacter.test(formNom) == true || formNom == ""){
-          checkMessage = "Vérifier/renseigner votre nom";
+        	checkMessage = "Vérifier/renseigner votre nom";
         }else{
-          console.log("Administration : Nom ok");
+        	console.log("Administration : Nom ok");
         };
         //Test du nom => aucun chiffre ou charactère spécial permis
         if(checkNumber.test(formPrenom) == true || checkSpecialCharacter.test(formPrenom) == true || formPrenom == ""){
-          checkMessage = checkMessage + "\n" + "Vérifier/renseigner votre prénom";
+        	checkMessage = checkMessage + "\n" + "Vérifier/renseigner votre prénom";
         }else{
-          console.log("Administration : Prénom ok");
+        	console.log("Administration : Prénom ok");
         };
         //Test du mail selon le regex de la source L256
         if(checkMail.test(formMail) == false){
-          checkMessage = checkMessage + "\n" + "Vérifier/renseigner votre email";
+        	checkMessage = checkMessage + "\n" + "Vérifier/renseigner votre email";
         }else{
-          console.log("Administration : Adresse mail ok");
+        	console.log("Administration : Adresse mail ok");
         };
         //Test de l'adresse => l'adresse ne contient pas obligatoirement un numéro de rue mais n'a pas de characteres spéciaux
         if(checkSpecialCharacter.test(formAdresse) == true || formAdresse == ""){
-          checkMessage = checkMessage + "\n" + "Vérifier/renseigner votre adresse";
+        	checkMessage = checkMessage + "\n" + "Vérifier/renseigner votre adresse";
         }else{
-          console.log("Administration : Adresse ok");
+        	console.log("Administration : Adresse ok");
         };
         //Test de la ville => aucune ville en France ne comporte de chiffre ou charactères spéciaux
         if(checkSpecialCharacter.test(formVille) == true && checkNumber.test(formVille) == true || formVille == ""){
-          checkMessage = checkMessage + "\n" + "Vérifier/renseigner votre ville"
+        	checkMessage = checkMessage + "\n" + "Vérifier/renseigner votre ville"
         }else{
-          console.log("Administration : Ville ok")
+        	console.log("Administration : Ville ok")
         };
         //Si un des champs n'est pas bon => message d'alert avec la raison
         if(checkMessage != ""){
-          alert("Il est nécessaire de :" + "\n" + checkMessage);
+        	alert("Il est nécessaire de :" + "\n" + checkMessage);
         }
         //Si tout est ok construction de l'objet contact => a revoir
         else{
-          contact = {
-            firstName : formNom,
-            lastName : formPrenom,
-            address : formAdresse,
-            city : formVille,
-            email : formMail
-          };
-          return contact;
+        	contact = {
+        		firstName : formNom,
+        		lastName : formPrenom,
+        		address : formAdresse,
+        		city : formVille,
+        		email : formMail
+        	};
+        	return contact;
         };
-      };
+    };
 
   //Vérification du panier
   checkPanier = () =>{
   //Vérifier qu'il y ai au moins un produit dans le panier
   let etatPanier = JSON.parse(localStorage.getItem("userPanier"));
   //Si le panier est vide ou null (suppression localStorage par)=>alerte
-  if(etatPanier.length < 1 || etatPanier == null){
-    alert("Votre panier est vide");
-    return false;
-  }else{
-    console.log("Administration : Le panier n'est pas vide")
+  if(etatPanier == null){
+	//Si l'utilisateur à supprimer son localStorage etatPanier sur la page basket.html et qu'il continue le process de commande
+	alert("Il y a eu un problème avec votre panier, une action non autorisée a été faite. Veuillez recharger la page pour la corriger");
+	return false
+}else if(etatPanier.length < 1 || etatPanier == null){
+	console.log("Administration: ERROR =>le localStorage ne contient pas de panier")
+	alert("Votre panier est vide");
+	return false;
+}else{
+	console.log("Administration : Le panier n'est pas vide")
     //Si le panier n'est pas vide on rempli le products envoyé à l'API
     JSON.parse(localStorage.getItem("userPanier")).forEach((produit) =>{
-      products.push(produit._id);
+    	products.push(produit._id);
     });
     console.log("Administration : Ce tableau sera envoyé à l'API : " + products)
     return true;
-  }
+}
 };
 
 /*Envoi du formulaire
@@ -365,11 +370,11 @@ addition = () =>{
 
   //Fonction requet post de l'API
   envoiDonnees = (objetRequest) => {
-    return new Promise((resolve)=>{
-      let request = new XMLHttpRequest();
-      request.onreadystatechange = function() {
-        if(this.readyState == XMLHttpRequest.DONE && this.status == 201) 
-        {
+  	return new Promise((resolve)=>{
+  		let request = new XMLHttpRequest();
+  		request.onreadystatechange = function() {
+  			if(this.readyState == XMLHttpRequest.DONE && this.status == 201) 
+  			{
           //Sauvegarde du retour de l'API dans la sessionStorage pour affichage dans order-confirm.html
           sessionStorage.setItem("order", this.responseText);
 
@@ -378,12 +383,12 @@ addition = () =>{
           document.forms["form-panier"].submit();
 
           resolve(JSON.parse(this.responseText));
-        }
-      };
-      request.open("POST", APIURL + "order");
-      request.setRequestHeader("Content-Type", "application/json");
-      request.send(objetRequest);
-    });
+      }
+  };
+  request.open("POST", APIURL + "order");
+  request.setRequestHeader("Content-Type", "application/json");
+  request.send(objetRequest);
+});
   };
 
   //Au click sur le btn de validation du formulaire
@@ -393,13 +398,13 @@ addition = () =>{
     btnForm.addEventListener("click", function(){
       //Lancement des verifications du panier et du form => si Ok envoi
       if(checkPanier() == true && checkInput() != null){
-        console.log("Administration : L'envoi peut etre fait");
+      	console.log("Administration : L'envoi peut etre fait");
       //Création de l'objet à envoyer
       let objet = {
-       contact,
-       products
-     };
-     console.log("Administration : " + objet);
+      	contact,
+      	products
+      };
+      console.log("Administration : " + objet);
      //Conversion en JSON
      let objetRequest = JSON.stringify(objet);
      console.log("Administration : " + objetRequest);
@@ -410,16 +415,16 @@ addition = () =>{
      contact = {};
      products = [];
      localStorage.clear();
-   }else{
-    console.log("Administration : ERROR");
-  };
+ }else{
+ 	console.log("Administration : ERROR");
+ };
 });
-  };
+};
 
 /*Affichage des informations sur la page de confirmation
 **********************************************/
 resultOrder = () =>{
-  if(sessionStorage.getItem("order") != null){
+	if(sessionStorage.getItem("order") != null){
     //Parse du session storage
     let order = JSON.parse(sessionStorage.getItem("order"));
     //Implatation de prénom et de id de commande dans le html sur la page de confirmation
@@ -428,7 +433,7 @@ resultOrder = () =>{
     
     //Suppression de la clé du sessionStorage pour renvoyer au else si actualisation de la page ou via url direct
     sessionStorage.removeItem("order");
-  }else{
+}else{
   //avertissement et redirection vers l'accueil
   alert("Aucune commande passée, vous êtes arrivé ici par erreur");
   window.open("./index.html");
